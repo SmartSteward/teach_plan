@@ -24,8 +24,11 @@
 * stm32项目讲解
 * github 相关操作
 
-### 第4周：
+### [第4周:home assistant的使用](week4.md)
 
+* 搭建home assistant及基础配置
+* 3D房屋模型搭建
+* 整体布局
 
 ### 第5周：
 
