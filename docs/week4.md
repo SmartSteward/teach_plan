@@ -12,7 +12,7 @@
 项目的ha地址：192.168.235.201:8123  
 用户名：nininini  
 密码：nininini  
-（2）基础配置  
+(2)基础配置  
   - 仪表盘：设置-仪表盘-新建仪表盘
   - 应用：设置-应用-安装应用-右上角添加仓库（<https://gitee.com/hacs-china/addons>）  
     - 安装以下应用：
@@ -39,10 +39,12 @@
 - 设置相机视角
 - 点击渲染才能看到效果图
 - 灯光的亮度在右边调整  
-  
-(2)PS的使用  
+
+(2)添加辅助元素  
+(3)PS的使用  
 <https://post.smzdm.com/p/aovleg59/>   
-(可以抠一个房屋去掉背景的图作为全暗)
+(可以抠一个房屋去掉背景的图作为全暗)  
+icon(<https://pictogrammers.com/library/mdi/>)
 ```
 type: picture-elements
 image: /local/home/全暗5.png
@@ -72,8 +74,37 @@ elements:
       action: more-info
 ```
 
+
 ### 3.整体布局
-天气卡片配置 
+(1)天气卡片配置 
 1. hacs里搜索`彩云天气`并下载卡片与集成
-2. 添加集成里搜索`天气预报`并下载 
-3. 仪表盘里卡片配置`weather.guangzhou`
+2. 添加集成里搜索`天气预报`并添加 
+3. 仪表盘里卡片配置`weather.guangzhou`  
+
+(2)连接MQTT   
+1. 添加集成里搜索`MQTT`并添加 
+2. 配置MQTT  
+   - MQTT服务端地址：znjj.piedaochuan.top
+   - 端口：1883  
+    
+3. 编辑/homeassistant/configuration.yaml
+4. 编辑/homeassistant/automations.yaml
+
+(3)全屏  
+1. 创建辅助元素-开关-名称`kiosk_mode`，会生成实体“input_boolean.kiosk_mode”  
+2. 编辑仪表盘
+  ```
+  kiosk_mode:
+  entity_settings:
+    - entity:
+        input_boolean.kiosk_mode: 'on'
+      hide_header: true
+      hide_sidebar: true
+    - entity:
+        input_boolean.kiosk_mode: 'off'
+      hide_header: false
+      hide_sidebar: false
+  ```
+(4)布局设计
+- 垂直堆叠
+- 磁贴
