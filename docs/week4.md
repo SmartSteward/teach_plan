@@ -12,6 +12,8 @@
 项目的ha地址：192.168.235.201:8123  
 用户名：nininini  
 密码：nininini  
+（我们的项目是需要校园网的，实验室里的网络也可以）   
+（自己的账号什么网络都可以）   
 (2)基础配置  
   - 仪表盘：设置-仪表盘-新建仪表盘
   - 应用：设置-应用-安装应用-右上角添加仓库（<https://gitee.com/hacs-china/addons>）  
@@ -19,13 +21,13 @@
       - `file-editor` (文件编辑器)
       - `Filebrowser` (文件浏览器)
       - `HA常用卡片`
-      - `Mosquitto broker (aliyun)` (MQTT代理)
       - `HACS` (home assistant社区商店)
     - HACS需要手动安装
+      - 可以参考(<https://blog.csdn.net/A15130402745/article/details/144989294>)
       - Filebrowser里home assistant是根目录，所有关于文件的操作都在这个文件夹里
       - 将hacs解压后上传到根目录（home assistant）的custom_components文件夹中，如果没有这个文件夹，新建一个
       - 重启homeassistant后，集成才能生效
-      - 可以参考(<https://blog.csdn.net/A15130402745/article/details/144989294>)
+      
 
 
 ### 2.3D房屋模型搭建
@@ -40,7 +42,7 @@
 - 点击渲染才能看到效果图
 - 灯光的亮度在右边调整  
 
-(2)添加辅助元素  
+(2)可以先配置3.2的mqtt实体  
 (3)PS的使用  
 <https://post.smzdm.com/p/aovleg59/>   
 (可以抠一个房屋去掉背景的图作为全暗)  
@@ -87,8 +89,17 @@ elements:
    - MQTT服务端地址：znjj.piedaochuan.top
    - 端口：1883  
     
-3. 编辑/homeassistant/configuration.yaml
-4. 编辑/homeassistant/automations.yaml
+3. 编辑/homeassistant/configuration.yaml(要特别注意同一层级的元素左侧必须对齐)
+   - 可以参考一下项目的代码
+   - state_topic: HA 监听状态的主题
+   - command_topic: HA 发送命令的主题
+  ```
+      - name: "客厅灯"
+      state_topic: "smarthome/livingroom/led"
+      command_topic: "smarthome/livingroom/led"
+      payload_on: "1"
+      payload_off: "0"
+  ```
 
 (3)全屏  
 1. 创建辅助元素-开关-名称`kiosk_mode`，会生成实体“input_boolean.kiosk_mode”  
