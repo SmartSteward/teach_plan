@@ -97,6 +97,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  // 1. 设置左右 RGB 灯灭 (输出低电平 RESET 熄灭)
+	      HAL_GPIO_WritePin(GPIOE, RRGB_R_Pin | RRGB_B_Pin | LRGB_G_Pin, GPIO_PIN_RESET);
+	      HAL_GPIO_WritePin(GPIOG, LRGB_R_Pin | LRGB_B_Pin, GPIO_PIN_RESET);
+	      HAL_Delay(200); // 延时 200ms
+
+	      // 2. 设置左右 RGB 灯全亮 (输出高电平 SET 点亮，此时红绿蓝全亮会混合成白光/紫光)
+	      HAL_GPIO_WritePin(GPIOE, RRGB_R_Pin | RRGB_G_Pin | RRGB_B_Pin | LRGB_G_Pin, GPIO_PIN_SET);
+	      HAL_GPIO_WritePin(GPIOG, LRGB_R_Pin | LRGB_B_Pin, GPIO_PIN_SET);
+	      HAL_Delay(200); // 延时 200ms
   }
   /* USER CODE END 3 */
 }
